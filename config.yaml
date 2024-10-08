@@ -1,0 +1,80 @@
+baseURL: https://lichturm.de/
+title: Lichturm
+theme: poison
+paginate: 10
+pluralizelisttitles: false
+languageCode: de
+defaultContentLanguage: de
+languages:
+  de:
+    contentDir: content/de
+    languageCode: de
+    languageName: Deutsch
+    weight: 1
+    params:
+      description: Welch schreckliche Nacht des Lesens mächtig zu sein!
+  # WIP
+  #en:
+  #  contentDir: content/en
+  #  languageCode: en-GB
+  #  languageName: English
+  #  weight: 2
+  #  params:
+  #    description: What a horrible night to be literate!
+params:
+  front_page_content:
+    - posts
+    - about
+  brand: Lichturm
+  brand_image: /images/lichturm.png
+  favicon: /images/lichturm_favicon.png
+  dark_mode: true
+  menu:
+    - Name: About
+      URL: /about/
+      HasChildren: false
+    - Name: Posts
+      URL: /posts/
+      Pre: Recent
+      HasChildren: true
+      Limit: 5
+  github_url: https://github.com/Atomsoldat
+  #linkedin_url: https://linkedin.com
+  email_url: mailto://lichturm@posteo.de
+  #rss_icon: true
+  #rss_section: posts
+  meta:
+    favicon: true
+taxonomies:
+  series: series
+  tags: tags
+
+
+
+  # BEGIN Default colours
+  sidebar_bg_color: '#202020'
+  sidebar_img_border_color: '#515151'
+  sidebar_p_color: '#909090'
+  sidebar_h1_color: '#FFF'
+  sidebar_a_color: '#FFF'
+  sidebar_socials_color: '#FFF'
+  moon_sun_color: '#FFF'
+  moon_sun_background_color: '#515151'
+  text_color: '#222'
+  content_bg_color: '#FAF9F6'
+  post_title_color: '#303030'
+  list_color: '#5a5a5a'
+  link_color: '#268bd2'
+  date_color: '#515151'
+  table_border_color: '#E5E5E5'
+  table_stripe_color: '#F9F9F9'
+  text_color_dark: '#eee'
+  content_bg_color_dark: '#121212'
+  post_title_color_dark: '#DBE2E9'
+  list_color_dark: '#9d9d9d'
+  link_color_dark: '#268bd2'
+  date_color_dark: '#9a9a9a'
+  table_border_color_dark: '#515151'
+  table_stripe_color_dark: '#202020'
+  # END Default colours
+
