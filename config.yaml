@@ -13,6 +13,15 @@ languages:
     weight: 1
     params:
       description: Welch schreckliche Nacht des Lesens mächtig zu sein!
+      menu:
+        - Name: Über  diese Seite
+          URL: /about/
+          HasChildren: false
+        - Name: Beiträge
+          URL: /posts/
+          Pre: Recent
+          HasChildren: true
+          Limit: 5
   # WIP
   #en:
   #  contentDir: content/en
@@ -29,18 +38,9 @@ params:
   brand_image: /images/lichturm.png
   favicon: /images/lichturm_favicon.png
   dark_mode: true
-  menu:
-    - Name: About
-      URL: /about/
-      HasChildren: false
-    - Name: Posts
-      URL: /posts/
-      Pre: Recent
-      HasChildren: true
-      Limit: 5
   github_url: https://github.com/Atomsoldat
   #linkedin_url: https://linkedin.com
-  email_url: mailto://lichturm@posteo.de
+  email_url: mailto:lichturm@posteo.de
   #rss_icon: true
   #rss_section: posts
   meta:
