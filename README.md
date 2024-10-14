@@ -1,3 +1,9 @@
+## Creating more content
+```
+hugo new content content/de/posts/123_abc.md
+```
+
+
 ## How does this work?
 - Make sure to read the documentation of our poison theme! https://themes.gohugo.io/themes/poison/
 - Poison Demo site https://poison.lukeorth.com/
