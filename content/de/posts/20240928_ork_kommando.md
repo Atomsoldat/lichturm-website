@@ -1,8 +1,10 @@
-+++
-title = 'Ork Kommando mit Gasmaske'
-date = 2024-09-24T15:44:13+01:00
-tags = [ "Tabletop", "Miniaturen" ] 
-+++
+---
+title: 'Ork Kommando mit Gasmaske'
+date: 2024-09-24T15:44:13+01:00
+tags: [ "Tabletop", "Miniaturen" ] 
+draft: true
+---
+
 ## Introduction
 Ich war erst ein wenig ratlos, wie ich den Gesellen hier anmalen sollte. Nachdem mir seine dunkle Jacke und Hose im ersten Anlauf
 nicht gefielen, habe ich einfach beschloßen, ein Tarnmuster draufzutüpfeln. Ich wollte gerne, dass es gut mit seiner grünen Haut
