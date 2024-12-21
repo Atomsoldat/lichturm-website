@@ -1,0 +1,13 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      # TODO: pick a version?
+      - uses: jakejarvis/hugo-build-action@master
+        with:
+          args: --minify
+      - uses: actions/upload-artifact@master
+        with:
+          name: website
+          path: './public'
