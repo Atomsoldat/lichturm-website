@@ -11,7 +11,23 @@ jobs:
       - uses: jakejarvis/hugo-build-action@master
         with:
           args: --minify
+      # so we can inspect what is being produced
       - uses: actions/upload-artifact@master
         with:
           name: website
           path: './public'
+      # upload to s3
+      - name: Install s3cmd
+        run: |
+          pip install s3cmd
+      - name: Configure s3cmd
+        run: |
+          echo "[default]" > ~/.s3cfg
+          echo "access_key = ${{ secrets.S3_KEY_ID }}" >> ~/.s3cfg
+          echo "secret_key = ${{ secrets.S3_SECRET_KEY }}" >> ~/.s3cfg
+          echo "host_base = fsn1.your-objectstorage.com" >> ~/.s3cfg
+          echo "host_bucket = %(bucket)s.fsn1.your-objectstorage.com" >> ~/.s3cfg
+      - name: Upload files to Hetzner S3
+        # with this configuration, the bucket should be specified as e.g. "s3://bucket1"
+        run: |
+          s3cmd sync ./public ${{ secrets.S3_BUCKET }} --delete-removed
