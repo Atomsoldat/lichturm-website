@@ -9,6 +9,8 @@ jobs:
       contents: 'read'
       id-token: 'write'
     env:
+      # define Hugo cachedir so it is not version dependent
+      HUGO_CACHEDIR: /tmp/hugo_cache
       IMAGE_NAME: 'lichturm-website'
       IMAGE_TAG: 'prod'
     runs-on: 'ubuntu-latest'
@@ -20,11 +22,23 @@ jobs:
         with:
           submodules: 'recursive'
 
-      # https://github.com/jakejarvis/hugo-build-action
-      - name: Build Website
-        uses: 'jakejarvis/hugo-build-action@v0.111.3'
+      # https://github.com/peaceiris/actions-hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
         with:
-          args: '--minify'
+          hugo-version: '0.131.0'
+
+      # cache the hugo output, so that only what has changed has to be regenerated
+      # https://github.com/actions/cache
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.HUGO_CACHEDIR }}
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
+      - name: Build Website
+        run: 'hugo --minify'
 
       # so we can inspect what is being produced
       # https://github.com/actions/upload-artifact
@@ -77,6 +91,7 @@ jobs:
           push: true
           tags: '${{ secrets.CONTAINER_REGISTRY_URL }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}'
 
+# once we are bored of building containers
 #      - name: Install s3cmd
 #        run: |
 #          pip install s3cmd
