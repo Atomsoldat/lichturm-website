@@ -1,4 +1,6 @@
-baseURL: https://lichturm.de/
+# comment out for now so we get relative links in the 
+# html output, makes things easier
+#baseURL: https://lichturm.de/
 title: Lichturm
 theme: poison
 paginate: 10
