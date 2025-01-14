@@ -12,6 +12,7 @@ jobs:
       # define Hugo cachedir so it is not version dependent
       HUGO_CACHEDIR: /tmp/hugo_cache
       IMAGE_NAME: 'lichturm-website'
+      SERVICE_NAME: 'lichturm-website'
       IMAGE_TAG: 'prod'
     runs-on: 'ubuntu-latest'
     steps:
@@ -57,9 +58,6 @@ jobs:
           project_id: '${{ secrets.PROJECT_ID }}'
           service_account: '${{ secrets.SERVICE_ACCOUNT }}'
           workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
-          #project_id: bob
-          #service_account: 123
-          #workload_identity_provider: xyz
 
       # https://github.com/docker/login-action
       - name: Docker Auth
@@ -81,7 +79,7 @@ jobs:
           buildkitd-flags: '--debug'
 
       # https://github.com/docker/build-push-action
-      - name: Build and push
+      - name: Build and push image
         uses: 'docker/build-push-action@v6'
         with:
           # we are not using the default git context because that would ignore our hugo build output
@@ -90,6 +88,15 @@ jobs:
           file: './Dockerfile'
           push: true
           tags: '${{ secrets.CONTAINER_REGISTRY_URL }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}'
+
+      # https://github.com/google-github-actions/deploy-cloudrun
+      - name: Deploy Image to Cloud Run
+        id: 'deploy'
+        uses: 'google-github-actions/deploy-cloudrun@v2'
+        with:
+          service: '${{ env.SERVICE_NAME }}'
+          image: '${{ secrets.CONTAINER_REGISTRY_URL }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}'
+          region: '${{ secrets.GCLOUD_REGION }}'
 
 # once we are bored of building containers
 #      - name: Install s3cmd
