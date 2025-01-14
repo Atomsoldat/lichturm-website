@@ -10,9 +10,9 @@ function cleanup() {
 # nuke container when finished
 trap cleanup EXIT
 
-#hugo --minify
+hugo --minify
 
-docker build -t lichturm-website-local-build:debug .
+docker build --no-cache -t lichturm-website-local-build:debug .
 docker run --publish 8080:80 --detach --rm --name lichturm-website-debug-container lichturm-website-local-build:debug 
 
 firefox --private-window http://localhost:8080
