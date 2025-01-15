@@ -10,7 +10,7 @@ set -euxo pipefail
  firefox --private-window http://localhost:1313
 } &
 
-hugo serve --disableFastRender --ignoreCache --navigateToChanged --port 1313 
+hugo serve --buildDrafts=true --disableFastRender --ignoreCache --navigateToChanged --port 1313
 
 
 
