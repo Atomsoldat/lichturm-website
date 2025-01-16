@@ -1,5 +1,6 @@
 ---
 title: "Migration von KMSv1 auf KMSv2 in Kubernetes"
+date: "2024-10-30T12:00:00+01:00"
 tags: ["Kubernetes"]
 ---
 
