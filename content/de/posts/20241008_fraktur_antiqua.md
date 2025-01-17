@@ -14,7 +14,7 @@ Schriften geworden. Wenn man Antiqua und Fraktur vergleicht, ist auf den ersten 
 Natürlich möchte nicht Jeder sich von jetzt auf gleich an das Lesen von Fraktur gewöhnen. Und vielleicht besuchen mich manche Leser
 ja auch nur aus einem ganz bestimmten Grund, wollen ein technisches Thema nachlesen, und von dannen ziehen. In solchen Fällen finde ich einen Kompromiss besser als gar keine Lösung, und so gibt es die Schaltfläche zum Umschalten auf die Garamond-Schriftart. Ich war mir tatsächlich nicht sicher, ob ich eine Antiquaschrift finden könnte, die mir 
 ebenso gut gefällt, nachdem ich eine ganze Menge Recherchearbeit in die Fraktur investiert hatte (und proprietär durfte sie auch nicht sein!). Aber ich muss sagen, dass ich seit
-ich diese hervorragende Schriftart gesehen habe, auch ein Interesse an Antiqua entwickle. Ich habe großen Respekt vor Menschen, die die Welt anderer Leute durch ihr Werk ein wenig schöner machen könnnen.
+ich diese hervorragende Schriftart gesehen habe, auch ein Interesse an Antiqua entwickle. Ich habe großen Respekt vor Menschen, die die Welt anderer Leute durch ihr Werk ein wenig schöner machen können.
 
 ## Aus Fehlern lernt man
 Im Moment verlasse ich mich blind auf die Opentype-Funktionalität meiner Frakturschriftart, um Ligaturen und das lange ſ setzen zu lassen.
