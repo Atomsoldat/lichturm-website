@@ -17,3 +17,6 @@ Praktisch das Gesamte Stück wurde durch eine Mischung aus Tüpfeln und Trockenb
 
 ## Vegetation
 Ich verteile gerne ein wenig Pflanzen in meinem Wüstengelände. So hat das Auge etwas mehr, an dem es sich freuen kann und das Gelände wirkt lebendiger. Also habe ich ein paar Büsche, Sträucher und Grasbüschel verteilt.
+
+## Bilder
+{{< image-gallery gallery_dir="images/mini_photos/temple/" >}}
