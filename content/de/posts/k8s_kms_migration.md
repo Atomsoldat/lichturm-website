@@ -5,7 +5,7 @@ tags: ["Kubernetes"]
 ---
 
 ## Nota Bene
-Bevor irgendwelche Arbeiten, die den etcd betreffen gemacht werden, ist es unabdingbar, von diesem [Backups anzufertigen](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster). Generell ist das mehr als empfehlenswert, wenn man einen Kubernetescluster betreibt, und zwar regelmässig und automatisiert. Mit der Funktion und Administration von etcd sollte man sich ebenso vertraut machen. Nun, da wir diese Vorkehrungen getroffen haben, können wir uns an die eigentliche Arbeit machen.
+Bevor irgendwelche Arbeiten, die den etcd betreffen, gemacht werden, ist es unabdingbar, von diesem [Backups anzufertigen](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster). Generell ist das mehr als empfehlenswert, wenn man einen Kubernetescluster betreibt, und zwar regelmässig und automatisiert. Mit der Funktion und Administration von etcd sollte man sich ebenso vertraut machen. Nun, da wir diese Vorkehrungen getroffen haben, können wir uns an die eigentliche Arbeit machen.
 
 
 ## Für und Wider
