@@ -3,6 +3,9 @@
 #baseURL: https://lichturm.de/
 title: Lichturm
 theme: poison
+# the fefault is to just allow crawlers everywhere
+# see https://gohugo.io/templates/robots/
+enableRobotsTXT: true
 paginate: 10
 pluralizelisttitles: false
 languageCode: de
@@ -32,6 +35,7 @@ languages:
   #  weight: 2
   #  params:
   #    description: What a horrible night to be literate!
+ 
 params:
   front_page_content:
     - posts
