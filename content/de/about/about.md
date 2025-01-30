@@ -7,7 +7,7 @@ draft: false
 Willkommen auf meiner Seite! Falls mich irgendwann einmal die Inspiration für ein umfassenderes Vorwort packen sollte, werde ich eines schreiben. Für den Moment: »**Hallo Welt!**«
 
 
-Ich betreibe diese Seite unter anderem, um mich mit Typographie auseinanderzusetzen. [Hier]({{< ref "/posts/20241008_fraktur_antiqua" >}} "Fraktur & Antiqua") habe ich ein paar Gedanken dazu aufgeschrieben.
+Ich betreibe diese Seite unter anderem, um mich mit Typographie auseinanderzusetzen. [Hier]({{< ref "/posts/fraktur_antiqua" >}} "Fraktur & Antiqua") habe ich ein paar Gedanken dazu aufgeschrieben.
 
 Es wird vor allem um folgende Themen gehen:
 
