@@ -55,7 +55,7 @@ Folgende Schritte werden durchlaufen werden:
 - Alle verschlüsselten Ressourcen werden neu verschlüsselt
 - KMS v2 wird alleine betrieben
 
-Der API-Server nutzt die KMS-Plugins in der Reihenfolge, wie sie in der `/etct/kubernetes/encryptionconfig.yaml` erscheinen, das gilt es zu nutzen und zu beachten, wenn man von einem KMS-Plugin auf das Andere wechseln will oder Daten neu verschlüsseln möchte. Sollte ein Plugin nicht erreichbar sein, oder einen Fehler liefern, wird das Nächste verwendet, und so weiter.
+Der API-Server nutzt die KMS-Plugins in der Reihenfolge, wie sie in der `/etc/kubernetes/encryptionconfig.yaml` erscheinen, das gilt es zu nutzen und zu beachten, wenn man von einem KMS-Plugin auf das Andere wechseln will oder Daten neu verschlüsseln möchte. Sollte ein Plugin nicht erreichbar sein, oder einen Fehler liefern, wird das Nächste verwendet, und so weiter.
 
 
 ### KMS v1 und v2 Parallel
