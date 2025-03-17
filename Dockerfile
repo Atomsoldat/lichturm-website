@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/nginx
 # https://github.com/nginxinc/docker-nginx
-FROM nginx:1.27.3@sha256:42e917aaa1b5bb40dd0f6f7f4f857490ac7747d7ef73b391c774a41a8b994f15
+FROM nginx:1.27.4@sha256:9d6b58feebd2dbd3c56ab5853333d627cc6e281011cfd6050fa4bcf2072c9496
 COPY public /usr/share/nginx/html
 COPY container_files/nginx.conf /etc/nginx/nginx.conf
 
