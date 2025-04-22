@@ -8,7 +8,7 @@ tags = ["Typographie"]
 In Antiquariaten  habe ich schon immer gerne gestöbert, und wollte mich nicht davon abwimmeln lassen, dass ich
 die Schriftart mancher Bücher, die mir gefielen, nicht gewohnt war. Also  setzte ich mich ein paar Tage hin und übte die Buchstaben.
 Für die Lektüre von historischen Texten hat sich das ebenfalls mehr als bezahlt gemacht. Mittlererweile bin ich ein großer Freund gebrochener
-Schriften geworden. Wenn man Antiqua und Fraktur vergleicht, ist auf den ersten Blick klar, welche der beiden ihren Ursprung als Kalligraphieschrift hat. Die Schriften haben auch einen ganz anderen Charakter, Antiqua scheint im Vergleich geradezu nüchtern. Deswegen war auch von Anfang an klar, welche Schrift ich für diese Seite nutzen würde.
+Schriften geworden. Wenn man Antiqua und Fraktur vergleicht, ist auf den ersten Blick klar, welche der beiden ihren Ursprung als Kalligraphieschrift hat, und welche zur einfachen Leserlichkeit, zum Beispiel von Inschriften auf Monumentalbauten entworfen wurde. Die Schriften haben auch einen ganz anderen Charakter, Antiqua scheint im Vergleich zu den vielfältigen Formen, Winkeln und Linien geradezu nüchtern. Deswegen war auch von Anfang an klar, welche Schrift ich für diese Seite nutzen würde.
 
 ## Römische Buchstaben aus Frankreich
 Natürlich möchte nicht Jeder sich von jetzt auf gleich an das Lesen von Fraktur gewöhnen. Und vielleicht besuchen mich manche Leser
