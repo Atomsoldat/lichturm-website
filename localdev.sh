@@ -14,7 +14,7 @@ hugo serve \
 	--buildDrafts=true \
 	--disableFastRender \
 	--ignoreCache \
-	--noHTTPCache
+	--noHTTPCache \
 	--navigateToChanged \
 	--port 1313
 
