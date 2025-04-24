@@ -3,13 +3,14 @@
 #baseURL: https://lichturm.de/
 title: Lichturm
 theme: poison
-# the fefault is to just allow crawlers everywhere
+# the default is to just allow crawlers everywhere
 # see https://gohugo.io/templates/robots/
 enableRobotsTXT: true
 paginate: 10
 pluralizelisttitles: false
-languageCode: de
 defaultContentLanguage: de
+# treat default language the same as others by having a dedicated subdir
+defaultContentLanguageInSubdir: true
 languages:
   de:
     contentDir: content/de
@@ -20,23 +21,47 @@ languages:
       description: Welch schreckliche Nacht des Lesens mächtig zu sein!
       menu:
         - Name: Über  diese Seite
-          URL: /about/
+          URL: /de/about/
           HasChildren: false
-        - Name: Beiträge
-          URL: /posts/
-          Pre: Recent
-          HasChildren: true
-          Limit: 5
-  # WIP
-  #en:
-  #  contentDir: content/en
-  #  languageCode: en-GB
-  #  languageName: English
-  #  weight: 2
-  #  params:
-  #    description: What a horrible night to be literate!
+        - Name: Alle Beiträge
+          URL: /de/posts/
+          #SubHeading: Neuerdings
+          #HasChildren: true
+          #Limit: 5
+        - Name: Weitere Dienste
+        - Name: Wiki
+          External: true
+          URL: https://wiki.lichturm.de
+        - Name: Foundry
+          External: true
+          URL: https://foundry.lichturm.de
+  en:
+    contentDir: content/en
+    languageCode: en-GB
+    languageName: English
+    weight: 10
+    params:
+      description: What a horrible night to be literate!
+      menu:
+        - Name: About this Page
+          URL: /en/about/
+          HasChildren: false
+        - Name: All Posts
+          URL: /en/posts/
+          #SubHeading: Recent
+          #HasChildren: true
+          #Limit: 5
+        - Name: Other Services
+        - Name: Wiki
+          External: true
+          URL: https://wiki.lichturm.de
+        - Name: Foundry
+          External: true
+          URL: https://foundry.lichturm.de
  
 params:
+  # this determines what kind of page bundles are considered for the content
+  # of the feed on the main page
   front_page_content:
     - posts
     - about
@@ -66,6 +91,9 @@ taxonomies:
   sidebar_socials_color: '#FFF'
   moon_sun_color: '#FFF'
   moon_sun_background_color: '#515151'
+  button_label_color: '#FFF'
+  button_background_color: '#515151'
+  button_background_highlight_color: '#616161'
   text_color: '#222'
   content_bg_color: '#FAF9F6'
   post_title_color: '#303030'
