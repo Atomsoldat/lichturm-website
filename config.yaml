@@ -13,7 +13,7 @@ defaultContentLanguage: de
 defaultContentLanguageInSubdir: true
 languages:
   de:
-    contentDir: content/de
+    contentDir: content/
     languageCode: de
     languageName: Deutsch
     weight: 1
@@ -36,7 +36,7 @@ languages:
           External: true
           URL: https://foundry.lichturm.de
   en:
-    contentDir: content/en
+    contentDir: content/
     languageCode: en-GB
     languageName: English
     weight: 10
