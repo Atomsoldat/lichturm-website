@@ -1,6 +1,6 @@
 ## Creating more content
 ```
-hugo new content content/de/posts/123_abc.md
+hugo new content content/posts/123_abc.de.md
 ```
 
 
