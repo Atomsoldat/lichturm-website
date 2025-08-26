@@ -7,7 +7,8 @@ set -euxo pipefail
 {
  echo "waiting 2s for hugo to start running..."
  sleep 2
- firefox --private-window http://localhost:1313
+ #firefox --private-window http://localhost:1313
+ brave-browser-stable --incognito http://localhost:1313
 } &
 
 hugo serve \
