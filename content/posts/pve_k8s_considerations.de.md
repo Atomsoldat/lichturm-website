@@ -1,5 +1,5 @@
 ---
-title: "Proxmox Kubernetes Cluster using Cluster API Part 0: Considerations"
+title: "Proxmox Kubernetes Cluster using Cluster API Teil 0: Überlegungen"
 date: 2025-04-23T18:32:34+02:00
 tags: ['Kubernetes', 'Proxmox']
 ---
