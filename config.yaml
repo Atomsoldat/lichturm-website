@@ -66,8 +66,8 @@ params:
     - posts
     - about
   brand: Lichturm
-  brand_image: /images/lichturm.png
-  favicon: /images/lichturm_favicon.png
+  brand_image: /images/lichturm.webp
+  favicon: /images/lichturm_favicon.jpg
   dark_mode: true
   github_url: https://github.com/Atomsoldat
   #linkedin_url: https://linkedin.com
