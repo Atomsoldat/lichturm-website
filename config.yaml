@@ -6,7 +6,8 @@ theme: poison
 # the default is to just allow crawlers everywhere
 # see https://gohugo.io/templates/robots/
 enableRobotsTXT: true
-paginate: 10
+pagination:
+  pagersize: 10
 pluralizelisttitles: false
 defaultContentLanguage: de
 # treat default language the same as others by having a dedicated subdir
