@@ -1,5 +1,5 @@
 ---
-title: "Pve_k8s_capi_testrun"
+title: "Proxmox Kubernetes using Cluster-API Part 2: Cluster-API Testrun"
 date: 2025-05-23T19:23:12+02:00
 tags: ["Kubernetes", "Proxmox"]
 ---
