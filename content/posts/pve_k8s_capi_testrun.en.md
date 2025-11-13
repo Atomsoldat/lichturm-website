@@ -1,8 +1,7 @@
 ---
 title: "Pve_k8s_capi_testrun"
 date: 2025-05-23T19:23:12+02:00
-draft: true
-tags: ["a", "b"]
+tags: ["Kubernetes", "Proxmox"]
 ---
 
 ## Reading material
@@ -52,6 +51,7 @@ pveum aclmod /sdn/zones/localnetwork/vmbr0 --user capmox-minimal@pve --role PVES
 ```
 
 Lastly, we create the token again.
+
 ```bash
 pveum user token add capmox-minimal@pve capi-token --privsep 0
 ```
@@ -83,7 +83,6 @@ PROXMOX_URL: "https://pve001.irminsul:8006"                   # The Proxmox VE h
 PROXMOX_TOKEN: "capmox@pve!capi-token"                        # The Proxmox VE TokenID for authentication
 PROXMOX_SECRET: "REDACTED"                                    # The secret associated with the TokenID
 
-
 ## -- Required workload cluster default settings -- ##
 PROXMOX_SOURCENODE: "pve002"                                  # The node that hosts the VM template to be used to provision VMs
 TEMPLATE_VMID: "101"                                          # The template VM ID used for cloning VMs
@@ -109,25 +108,14 @@ MEMORY_MIB: "8048"                                            # The memory size 
 
 EXP_CLUSTER_RESOURCE_SET: "true"                              # This enables the ClusterResourceSet feature that we are using to deploy CNI
 CLUSTER_TOPOLOGY: "true"                                      # This enables experimental ClusterClass templating
-
 ```
 
 With these configurations, we can begin by generating the resources that we will be deploying on our initialisation cluster. 
 
-
-
-```
-minikube start
-
-kubectl --context minikube get node
-```
-
-
-```
+```bash
 kind create cluster
 kubectl config use-context kind-kind
 ```
-
 
 - [CAPMOX XYZ-provider](https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main) 
 - [in-cluster IPAM-provider](https://github.com/kubernetes-sigs/cluster-api-ipam-provider-in-cluster) 
@@ -137,58 +125,41 @@ kubectl config use-context kind-kind
   - `clusterctl init` [will fetch resources](https://cluster-api.sigs.k8s.io/clusterctl/commands/init#provider-repositories) defined in the respective repositories of the providers installed. These resources can be modified and overriden, refer to the documentation.
 
 
-If you would like to take a look at what resources exactly `clusterctl init` will install in your cluster (which I reccommend you do!), you can do so with the `generate` subcommand. Note, that you can invoke each provider with a specific version, if you want, and that you can use the `--describe` option to get information on the version used, as well as which variables can be set.
+If you would like to take a look at what resources exactly `clusterctl init` will install in your cluster (which I recommend you do!), you can do so with the `generate` subcommand. Note, that you can invoke each provider with a specific version, if you want, and that you can use the `--describe` option to get information on the version used, as well as which variables can be set.
 
-```
+```bash
 clusterctl generate provider --core  cluster-api  --describe
 clusterctl generate provider --core  cluster-api:v1.9.6 --config clusterctl-config.yaml
 clusterctl generate provider --infrastructure proxmox --config clusterctl-config.yaml
 clusterctl generate provider --ipam in-cluster --describe --config clusterctl-config.yaml
 ```
 
+Depending on how specific you would like to be, you can specify each provider with its version, or let clusterctl select the default. It will tell you which versions are installed. Note, that `clusterctl init` uses the currently active config from your `~/.kube/config`. If you executed the command to switch context previously, the kind context will be selected. When in doubt, check with `kubectl config current-context`.
 
-
-
-either
-Depending on how specific you would like to be, you can specify each provider with its version, or let clusterctl select the default. It will tell you which versions are installed. Note, that `clusterctl init` uses the currently active config from your `~/.kube/config`. If you executed the `minikube start` command previously, the minikube context will be selected. When in doubt, check with `kubectl config current-context`.
-
-```
+```bash
 clusterctl init --core cluster-api --ipam in-cluster --infrastructure proxmox --config clusterctl-config.yaml
 clusterctl init --infrastructure proxmox --config clusterctl-config.yaml
 ```
 
-After
+You  may want to manage your Cluster-API providers using GitOps eventually. This is an advanced topic, since there are a lot of interdependencies to be aware of during updates. For the beginning, `clusterctl upgrade` will allow you to upgrade without having to take care of all those yourself.
 
 
+## Creating a Workload cluster
 
-or
-if you want to do this, note, that cluster-api depends on cert-manager
-so you will have to [install the certmanager components yourself](https://cert-manager.io/docs/installation/kubectl/) for this to work
-```
-clusterctl generate provider --core  cluster-api > core.yaml
-clusterctl generate provider --ipam in-cluster > ipam.yaml
-clusterctl generate provider --infrastructure proxmox > capmox.yaml
-```
-
-
-Create Workload cluster
-
-```
+With the providers running  in our cluster, we can now create the manifests for our actual Kubernetes cluster, and apply them:
+```bash
 clusterctl generate cluster proxmox-quickstart     --infrastructure proxmox     --kubernetes-version v1.30.11 --control-plane-machine-count 3     --worker-machine-count 1 --config clusterctl-config.yaml   > workload-cluster.yaml
-kubectl --context minikube apply -f workload-cluster.yaml
-
+kubectl --context kind-kind apply -f workload-cluster.yaml
 ```
 
-After this, the Cluster-API components running inside your kind cluster should begin creating VMs in your Proxmox cluster. Depending on how fast your infrastructure is, this will take a while. You can take a look
+After this, the Cluster-API components running inside your kind cluster should begin creating VMs in your Proxmox cluster. Depending on how fast your infrastructure is, this will take a while. You can take a look with the `clusterctl` command:
 
-The `clusterctl` command
-```
+```bash
 clusterctl describe cluster proxmox-quickstart
 ```
 
-
 Once your cluster has some nodes running, you can get the `kubeconfig`-File to access it as follows:
-```
+```bash
 clusterctl get kubeconfig nekropolis > nekropolis.kubeconfig
 kubectl --kubeconfig nekropolis.kubeconfig get node
 ```
