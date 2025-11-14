@@ -30,8 +30,8 @@ pvesh create /pools --poolid k8s-templates-necropolis --comment "Template pool f
 Next are some custom roles for permissions we have to grant in addition to those we can grant with default roles. I like prefixing roles I created, so i can easily tell them apart.
 
 ```bash
-pveum role add USERDEFINED.capmox-Sys.Audit --privs "Sys.Audit"
-pveum role add USERDEFINED.capmox-Datastore.AllocateSpace --privs "Datastore.AllocateSpace"
+pveum role add NOCTURNENECROPLEX.capmox-Sys.Audit --privs "Sys.Audit"
+pveum role add NOCTURNENECROPLEX.capmox-Datastore.AllocateSpace --privs "Datastore.AllocateSpace"
 ```
 
 
@@ -89,9 +89,6 @@ TEMPLATE_VMID: "101"                                          # The template VM 
 ALLOWED_NODES: "[pve001,pve002,pve020]"                       # The Proxmox VE nodes used for VM deployments
 VM_SSH_KEYS: "id_ed25519"                                     # The ssh authorized keys used to ssh to the machines.
 
-# it can be nice to have all the adresses related to a cluster within a single subnet (ingress, controlplane, nodes, ...)
-# hence, we can select both an ip_prefix to define the underlying subnet,
-# as well as ranges within that subnet to allocate to our nodes
 ## -- networking configuration-- ##
 CONTROL_PLANE_ENDPOINT_IP: "192.168.10.11"                    # The IP that kube-vip is going to use as a control plane endpoint
 NODE_IP_RANGES: "[192.168.10.50-192.168.10.100]"              # The IP ranges for Cluster nodes
@@ -101,7 +98,7 @@ DNS_SERVERS: "[192.168.178.2, 84.200.69.80, 9.9.9.9]"         # The dns nameserv
 BRIDGE: "vmbr1"                                               # The network bridge device for Proxmox VE VMs
 
 BOOT_VOLUME_DEVICE: "scsi0"                                   # The device used for the boot disk.
-BOOT_VOLUME_SIZE: "50"                                       # The size of the boot disk in GB.
+BOOT_VOLUME_SIZE: "50"                                        # The size of the boot disk in GB.
 NUM_SOCKETS: "2"                                              # The number of sockets for the VMs.
 NUM_CORES: "4"                                                # The number of cores for the VMs.
 MEMORY_MIB: "8048"                                            # The memory size for the VMs.
@@ -117,7 +114,9 @@ kind create cluster
 kubectl config use-context kind-kind
 ```
 
-- [CAPMOX XYZ-provider](https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main) 
+If you like, have a look at the projects we are about to utilise:
+
+- [CAPMOX Provider](https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main) 
 - [in-cluster IPAM-provider](https://github.com/kubernetes-sigs/cluster-api-ipam-provider-in-cluster) 
 - [Cluster-API core](https://github.com/kubernetes-sigs/cluster-api)
 - [clusterctl CLI](https://cluster-api.sigs.k8s.io/clusterctl/overview)
@@ -134,7 +133,7 @@ clusterctl generate provider --infrastructure proxmox --config clusterctl-config
 clusterctl generate provider --ipam in-cluster --describe --config clusterctl-config.yaml
 ```
 
-Depending on how specific you would like to be, you can specify each provider with its version, or let clusterctl select the default. It will tell you which versions are installed. Note, that `clusterctl init` uses the currently active config from your `~/.kube/config`. If you executed the command to switch context previously, the kind context will be selected. When in doubt, check with `kubectl config current-context`.
+Depending on how specific you would like to be, you can specify each provider with its version, or let clusterctl select the default. It will tell you which versions are installed. Note, that `clusterctl init` uses the currently active config from your `~/.kube/config`. If you executed the command to switch context previously, the `kind` context (which is what we want) will be selected. When in doubt, check with `kubectl config current-context`.
 
 ```bash
 clusterctl init --core cluster-api --ipam in-cluster --infrastructure proxmox --config clusterctl-config.yaml
@@ -146,7 +145,7 @@ You  may want to manage your Cluster-API providers using GitOps eventually. This
 
 ## Creating a Workload cluster
 
-With the providers running  in our cluster, we can now create the manifests for our actual Kubernetes cluster, and apply them:
+With the providers running  in our bootstrap cluster, we can now create the manifests for our actual Kubernetes cluster, and apply them:
 ```bash
 clusterctl generate cluster proxmox-quickstart     --infrastructure proxmox     --kubernetes-version v1.30.11 --control-plane-machine-count 3     --worker-machine-count 1 --config clusterctl-config.yaml   > workload-cluster.yaml
 kubectl --context kind-kind apply -f workload-cluster.yaml
@@ -158,10 +157,15 @@ After this, the Cluster-API components running inside your kind cluster should b
 clusterctl describe cluster proxmox-quickstart
 ```
 
+At this point, no CNI is configured yet. Without a CNI, Kubernetes is not particularly useful, because no communication is possible  between nodes. Cluster-API will also not consider your nodes healthy, and may stop provisioning new ones, if new nodes fail to become  healthy. You can either [install a CNI yourself](https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/), or use  a `ClusterResourceSet`. This is a [feature provided by Cluster API](https://cluster-api.sigs.k8s.io/tasks/experimental-features/cluster-resource-set) which serves the purpose of automatically applying a set of resources to a newly created cluster, possibly updating them, as the CRS is modified. The kind reader will have to decide whether or not this is beneficial for the use case at hand. On the one hand, for example, this could make the automation of tests easier, on the other hand, it introduces another process modifying things inside our cluster, which can be confusing to people unaware of this. I will demonstrate using a CRS in the next entry of this series.
+
+
 Once your cluster has some nodes running, you can get the `kubeconfig`-File to access it as follows:
 ```bash
 clusterctl get kubeconfig nekropolis > nekropolis.kubeconfig
 kubectl --kubeconfig nekropolis.kubeconfig get node
 ```
 
-At this point, no CNI is configured yet. You can either [install it yourself](https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/), or use  a `ClusterResourceSet`. This is a [feature provided by Cluster API](https://cluster-api.sigs.k8s.io/tasks/experimental-features/cluster-resource-set) which serves the purpose of automatically applying a set of resources to a newly created cluster, possibly updating them, as the CRS is modified. The kind reader will have to decide whether or not this is beneficial for the use case at hand. On the one hand, for example, this could make the automation of tests easier, on the other hand, it introduces another process modifying things inside our cluster, which can be confusing to people unaware of this. I will demonstrate using a CRS in the next entry of this series.
+
+## Summary
+And with that, we should have created a functional Kubernetes cluster, with which we can already do many interesting things. In the following articles we will go through some  further topics, such as the already mentioned CRS and migrating the Cluster-API manifests.
