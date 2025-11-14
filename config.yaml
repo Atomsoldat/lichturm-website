@@ -30,9 +30,9 @@ languages:
           #HasChildren: true
           #Limit: 5
         - Name: Weitere Dienste
-        - Name: Wiki
-          External: true
-          URL: https://wiki.lichturm.de
+        #- Name: Wiki
+        #  External: true
+        #  URL: https://wiki.lichturm.de
         - Name: Foundry
           External: true
           URL: https://foundry.lichturm.de
